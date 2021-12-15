@@ -27,6 +27,7 @@ def generateVulnsReport(hosts):
         XMLHost = ET.SubElement(XMLReport,"host")
         XMLAddress = ET.SubElement(XMLHost,"address")
         XMLAddress.text = host.address
+        countVulns = 0
         for tag in host.vulnsReport.scriptsTags:
             if(tag["script"] != None):
                 XMLVulns = ET.SubElement(XMLHost,"vulnerabilities")
@@ -34,6 +35,12 @@ def generateVulnsReport(hosts):
                 XMLPort.text = tag["port"].portId
                 XMLOutput = ET.SubElement(XMLVulns,"output")
                 XMLOutput.insert(1,tag["script"])
+                countVulns = countVulns + 1
+        
+        if(countVulns == 0):
+            print(bcolors.WARNING+"No vulnerabilities found for"+host.address+bcolors.ENDC)
+        else:
+            print(bcolors.OKCYAN+"Found ["+str(countVulns)+"] possible vulnerability for "+host.address+bcolors.ENDC)
 
     with open("reports/"+filename, 'w') as f:
         tree = ET.ElementTree(XMLReport)

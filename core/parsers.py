@@ -7,7 +7,7 @@ from typing import List
 from utils.bcolors import bcolors
 import os
 
-def getHosts(file, removeTemp=True):
+def getHosts(file, persistTemp=False):
     report = ET.parse(file)
     hostsXML = report.findall("host")
     hosts = []
@@ -18,9 +18,9 @@ def getHosts(file, removeTemp=True):
         hosts.append(host)
 
  
-    if(removeTemp):
+    if(persistTemp == False):
         # Deleting temporary file after parsing 
-        print(bcolors.OKBLUE+"Deleting temporary file after parsin")
+        print(bcolors.OKBLUE+"Deleting temporary file after parsing")
         print(bcolors.BOLD+"NOTICE: You can diseable this feature by passing '-persist' option"+bcolors.ENDC)
         ####### BE CAREFUL ! DON'T TOUCH THIS LINE, IT COULD HURT YOUR SYSTEM ######
         os.remove(file)
