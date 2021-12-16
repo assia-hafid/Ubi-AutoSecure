@@ -43,7 +43,7 @@ def scanHostsPorts(hosts, interface="",reportPath="", scanProtocol="-sT",scanTyp
     scanRangeNmap = getPortRangeScanType(scanType)
     scanProtocolType = getProtocolScanType(scanProtocol)
     # We use the spread operator '*' to concatenate the "baseCommande" list with the interface options
-    baseCommande = ["nmap",scanProtocolType,scanRangeNmap,"--version-intensity","0","-A",*hosts,NSECommand,"-oX", newReportPath]
+    baseCommande = ["nmap","-T5",scanProtocolType,scanRangeNmap,"--version-intensity","0","-A",*hosts,NSECommand,"-oX", newReportPath]
     if(interface != ""):
         cmd = [*baseCommande, "-e", interface] 
     
