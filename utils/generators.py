@@ -28,14 +28,18 @@ def generateVulnsReport(hosts):
         XMLAddress = ET.SubElement(XMLHost,"address")
         XMLAddress.text = host.address
         countVulns = 0
-        for tag in host.vulnsReport.scriptsTags:
-            if(tag["script"] != None):
+        for vuln in host.vulnsReport.vulns:
+            if(vuln["scripts"] != None):
                 XMLVulns = ET.SubElement(XMLHost,"vulnerabilities")
                 XMLPort = ET.SubElement(XMLVulns,"port")
-                XMLPort.text = tag["port"].portId
+                XMLPort.text = vuln["port"].portId
                 XMLOutput = ET.SubElement(XMLVulns,"output")
-                XMLOutput.insert(1,tag["script"])
-                countVulns = countVulns + 1
+                scriptsCount = 1
+                for script in vuln["scripts"]:
+                    XMLScripts = ET.SubElement(XMLOutput,"scripts")
+                    XMLScripts.insert(scriptsCount,script)
+                    scriptsCount = scriptsCount + 1
+                    countVulns = countVulns + 1
         
         if(countVulns == 0):
             print(bcolors.WARNING+"No vulnerabilities found for"+host.address+bcolors.ENDC)

@@ -30,9 +30,10 @@ def scanHostsPorts(hosts, interface="",reportPath="", scanProtocol="-sT",scanTyp
 
     ### Check if the path exists : 
     NSECategories = ",".join(PREDEFINED_VALUES.BASIC_NSE_CATEGORIES)
+    
     if(os.path.isdir(DIRECTORIES.NSE_DIR)):
         NSECommand = "--script="+ NSECategories + "," + os.path.abspath(DIRECTORIES.NSE_DIR)+"/"
-        os.path
+        #os.path
     else:
         print(bcolors.FAIL+"Custom NSE Resources not found, performing tests with basic categories: "+str(PREDEFINED_VALUES.BASIC_NSE_CATEGORIES)+bcolors.ENDC)
         NSECommand = "--script="+NSECategories
@@ -43,7 +44,7 @@ def scanHostsPorts(hosts, interface="",reportPath="", scanProtocol="-sT",scanTyp
     scanRangeNmap = getPortRangeScanType(scanType)
     scanProtocolType = getProtocolScanType(scanProtocol)
     # We use the spread operator '*' to concatenate the "baseCommande" list with the interface options
-    baseCommande = ["nmap","-T5",scanProtocolType,scanRangeNmap,"--version-intensity","0","-A",*hosts,NSECommand,"-oX", newReportPath]
+    baseCommande = ["nmap","-T5",scanProtocolType,scanRangeNmap,*hosts,NSECommand,"-oX", newReportPath]
     if(interface != ""):
         cmd = [*baseCommande, "-e", interface] 
     

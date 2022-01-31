@@ -6,9 +6,11 @@ from core.VulnsReport import VulnsReport
 from typing import List
 from utils.bcolors import bcolors
 import os
+import json
 
 def getHosts(file, persistTemp=False):
     report = ET.parse(file)
+    #data = json.dump(report)
     hostsXML = report.findall("host")
     hosts = []
     for hostXML in hostsXML:
@@ -68,13 +70,13 @@ def mapXMLPort(portXML):
     return port
 
 def mapVulns(hostXML):
-    vulns = VulnsReport()
+    vulnsReport = VulnsReport()
     portsXML = hostXML.find("ports").findall("port")
     if portsXML == None: 
         return None
     for portXML in portsXML:
         port = mapXMLPort(portXML)
-        scriptXML = portXML.find("script")
-        vulns.scriptsTags.append({"port":port, "script":scriptXML})
+        scriptsXML = portXML.findall("script")
+        vulnsReport.vulns.append({"port":port, "scripts":scriptsXML})
     
-    return vulns
+    return vulnsReport

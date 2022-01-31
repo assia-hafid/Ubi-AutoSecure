@@ -33,3 +33,22 @@ def getLogo():
     f = open("logo.txt")
     file_contents = f.read()
     return file_contents
+
+
+def printComparaison(diffsHosts):
+    print("Here is all the new things")
+    index = 1
+    for diffHost in diffsHosts:
+        print("Host "+str(index)+":   [ "+bcolors.BOLD+printChanged(diffHost.address)+bcolors.ENDC+" ] | status: "+printChanged(diffHost.state)+" | type: "+printChanged(diffHost.addressType))
+        table = PrettyTable()
+        table.field_names = ["port", "protocol", "state","service"]
+        for port in diffHost.ports:
+            table.add_row([port.portId,printChanged(port.protocol),printChanged(formatState(port.state)),printChanged(port.service)])
+        
+        print(table)
+        index = index + 1
+
+def printChanged(value):
+    if value == None:
+        return "NOT CHANGED"
+    return value

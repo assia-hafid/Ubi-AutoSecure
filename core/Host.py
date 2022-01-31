@@ -9,12 +9,10 @@ class Host:
         self.addressType = ""
         self.state = ""
         self.ports = []
+
+        # This attribute is only used for XML Report generation
         self.vulnsReport = VulnsReport()
 
 
-    # def __init__(self, address, addressType, state, ports):
-    #     self.address = address
-    #     self.addressType = addressType
-    #     self.state = state
-    #     self.ports = ports
+
 

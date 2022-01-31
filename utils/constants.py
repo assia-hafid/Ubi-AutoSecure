@@ -7,9 +7,10 @@ class PREDEFINED_VALUES:
     SCANPROTOCOL = ["TCP","UDP"]
     SCANTYPES = ["FAST", "ALL"]
     BASIC_NSE_CATEGORIES = [
-        "vuln","safe"
+        "vuln",
+        #"safe"
     ]
-    ""
+    
 class DIRECTORIES:
     NSE_DIR = "resources/NSE/"
 
