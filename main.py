@@ -23,9 +23,11 @@ checkRootPerms()
 parser = argparse.ArgumentParser(description="Run IOTScanner")
 parser.add_argument("-targets",metavar="X/Y",required=True, help="Host or range to scan", nargs="*")
 parser.add_argument("-interface",metavar="ethX",required=False, help="Interface to use, optional", default="")
-parser.add_argument("-scanProtocol",metavar="Ex: TCP or UDP",required=False, help="Scan Protocol for nmap, TCP: -sT, UDP: -sU", default=DEFAULT_VALUES.DEFAULT_SCANPROTOCOL)
+parser.add_argument("-scanProtocol",metavar="Ex: TCP or UDP",required=False,
+                    help="Scan Protocol for nmap, TCP: -sT, UDP: -sU", default=DEFAULT_VALUES.DEFAULT_SCANPROTOCOL)
 parser.add_argument("-scanType",metavar="Ex: ALL or FAST",required=False, help="Scan Type for nmap, FAST: -F, ALL: -p-", default=DEFAULT_VALUES.DEFAULT_SCANTYPE)
-parser.add_argument("-persist",required=False, help="persist nmap remort in /tmp", default=DEFAULT_VALUES.DEFAULT_DELETE_TEMP_FILE, action='store_true')
+parser.add_argument("-persist",required=False, help="persist nmap report in /tmp",
+                    default=DEFAULT_VALUES.DEFAULT_DELETE_TEMP_FILE, action='store_true')
 
 
 args = parser.parse_args()

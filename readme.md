@@ -1,11 +1,23 @@
 # Ubi-AutoSecure 
 
 ## Introduction 
-This project is created for educational purposes to simulate an auto-scanning behavior on IoT devices called UbiQuarium, with Nmap, and its Scripting Engine, while providing reports through parsing processes.
+This project is created for educational purposes to simulate an auto-scanning behavior on IoT devices called UbiQuarium, 
+with Nmap, and its "Scripting Engine", while providing reports through parsing processes.
+
+The tool provides a non-relational database with JSON to store scan results and perform 
+comparisons to construct a report holding all new **changes**.
+
+## Features
+- **Provide different types of scanning** (UPD, TCP, Fast, Global...)
+- **Generate vulnerabilities report** (Based on pre-built and customized NSE)
+- **Save scan results as JSON**
+- **Compare scan results to make a "_Comparison Report_"**
+
 
 ## Global Structure 
 
-The figure below present an overview on the communication between modules of the project, thus the data flow from user input to user output
+The figure below present an overview on the communication between modules of the project, 
+thus the data flow from user input to user output
 
 ![Diagram1](resources/diagram1.jpeg)
 
@@ -32,4 +44,4 @@ You can run :
 
 For more informations about different options
 
-#
+

@@ -1,6 +1,6 @@
-from core.Port import Port
-from core.VulnsReport import VulnsReport
-from typing import List
+from core.models.Port import Port
+from core.models.VulnsReport import VulnsReport
+
 
 class Host:
 
@@ -8,11 +8,7 @@ class Host:
         self.address = ""
         self.addressType = ""
         self.state = ""
-        self.ports = []
+        self.ports:list[Port] = []
 
         # This attribute is only used for XML Report generation
         self.vulnsReport = VulnsReport()
-
-
-
-

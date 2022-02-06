@@ -1,18 +1,29 @@
 class DEFAULT_VALUES:
-    DEFAULT_SCANPROTOCOL="TCP"
-    DEFAULT_SCANTYPE="FAST"
-    DEFAULT_DELETE_TEMP_FILE=False
+    DEFAULT_SCANPROTOCOL = "TCP"
+    DEFAULT_SCANTYPE = "FAST"
+    DEFAULT_DELETE_TEMP_FILE = False
+
 
 class PREDEFINED_VALUES:
-    SCANPROTOCOL = ["TCP","UDP"]
+    SCANPROTOCOL = ["TCP", "UDP"]
     SCANTYPES = ["FAST", "ALL"]
     BASIC_NSE_CATEGORIES = [
         "vuln",
-        #"safe"
+        # "safe"
     ]
-    
+
+
 class DIRECTORIES:
     NSE_DIR = "resources/NSE/"
 
+
 class LINKS:
     NSE_USAGE = "https://nmap.org/book/nse-usage.html"
+
+
+class VALUES:
+    NOT_CHANGED = " [NOT CHANGED]"
+
+
+class DATABASE:
+    JSON_PATH = "core/database/data/hosts.json"
