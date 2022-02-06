@@ -1,4 +1,4 @@
-# Ubi-AutoSecure 
+# Ubi-AutoSecure V-3.0.0
 
 ## Introduction 
 This project is created for educational purposes to simulate an auto-scanning behavior on IoT devices called UbiQuarium, 
