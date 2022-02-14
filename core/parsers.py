@@ -7,15 +7,16 @@ from utils.bcolors import bcolors
 import os
 
 
-def getHosts(file: str, persistTemp=False):
+def getHosts(file: str, persistTemp=False, vulns=False):
     report = ET.parse(file)
     # data = json.dump(report)
     hostsXML = report.findall("host")
     hosts = []
     for hostXML in hostsXML:
         host = mapXMLHost(hostXML)
-        vulns = mapVulns(hostXML)
-        host.vulnsReport = vulns
+        if vulns is True:
+            vulns = mapVulns(hostXML)
+            host.vulnsReport = vulns
         hosts.append(host)
 
     if not persistTemp:

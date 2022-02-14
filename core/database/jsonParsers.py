@@ -60,6 +60,3 @@ def stringifyPorts(ports: list[Port]):
 def save(file: str, hosts: list[Host]):
     with open(file, "w") as write_file:
         json.dump(stringifyHosts(hosts), write_file, indent=4)
-
-# load("/home/achraf/Documents/projetUbi/Ubi-AutoSecure/core/database/data/hosts.json")
-# load("/home/achraf/Documents/projetUbi/Ubi-AutoSecure/core/database/data/testhosts.json")

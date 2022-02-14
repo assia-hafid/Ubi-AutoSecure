@@ -5,8 +5,8 @@ from core.models.Port import Port
 from utils.constants import VALUES
 
 
-def checkRootPerms():
-    if os.getuid() != 0:
+def checkRootPerms(scanProtocol: str):
+    if scanProtocol == "UDP" and os.getuid() != 0:
         print(bcolors.FAIL + "You need root permissions to do run the script!")
         exit(1)
 

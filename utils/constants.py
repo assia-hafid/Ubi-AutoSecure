@@ -21,6 +21,7 @@ class LINKS:
     NSE_USAGE = "https://nmap.org/book/nse-usage.html"
 
 
+# DON'T TOUCH THIS
 class VALUES:
     NOT_CHANGED = " [NOT CHANGED]"
 

@@ -33,8 +33,47 @@ If you are interested more in details about how python components are written (i
 The main usage of the tool is the following: 
 
 ```bash
-> python3 main.py -targets X.X.X.X [-scanType {ALL|FAST}] [-scanProtocol {TCP|UDP}] [-interface "name"] [-persist]
+> python3 main.py -targets X.X.X.X [-scanType {ALL|FAST}] [-scanProtocol {TCP|UDP}] [-interface "name"] [-persist] [-vulns] 
 ```
+
+<table>
+    <tr>
+        <th>Paramter</th>
+        <th>Description</th>
+        <th>is Required?</th>
+    </tr>
+    <tr>
+        <td>-target</td>
+        <td>tde ip address to scan, or the range (ex: 10.10.10.1, 10.10.10.1/24)</td>
+        <td><b>yes</b></td>
+    </tr>
+    <tr>
+        <td>-scanType</td>
+        <td>Scan Type for nmap, FAST: -F, ALL: -p-</td>
+        <td>no, default: FAST</td>
+    </tr>
+    <tr>
+        <td>-scanProtocol</td>
+        <td>TCP or UDP</td>
+        <td>no, default: TCP</td>
+    </tr>
+    <tr>
+        <td>-interfacfe</td>
+        <td>Interface to use</td>
+        <td>no, default one from system</td>
+    </tr>
+    <tr>
+        <td>-persist</td>
+        <td>Persist nmap report in /tmp</td>
+        <td>no, default false</td>
+    </tr>
+    <tr>
+        <td>-vulns</td>
+        <td>Enable vulnerabilities scan for performance</td>
+        <td>no, default false</td>
+    </tr>
+    
+</table>
 
 You can run : 
 
@@ -42,6 +81,6 @@ You can run :
 > python3 main.py --help 
 ```
 
-For more informations about different options
+For more information about different options
 
 

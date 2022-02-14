@@ -6,7 +6,7 @@ from utils.constants import DIRECTORIES, PREDEFINED_VALUES, LINKS
 import os
 
 
-def scanHostsPorts(hosts: list[Host], interface="", reportPath="", scanProtocol="-sT", scanType="-F"):
+def scanHostsPorts(hosts: list[Host], interface="", reportPath="", scanProtocol="-sT", scanType="-F", vulns=False):
     """
     This function scan all ports in a given host, and store
     the results as an XML file in /tmp with a random name if
@@ -31,37 +31,41 @@ def scanHostsPorts(hosts: list[Host], interface="", reportPath="", scanProtocol=
 
     ### Check if the path exists : 
     NSECategories = ",".join(PREDEFINED_VALUES.BASIC_NSE_CATEGORIES)
-
-    if os.path.isdir(DIRECTORIES.NSE_DIR):
-        NSECommand = "--script=" + NSECategories + "," + os.path.abspath(DIRECTORIES.NSE_DIR) + "/"
+    if vulns is True:
+        if os.path.isdir(DIRECTORIES.NSE_DIR):
+            NSECommand = "--script=" + NSECategories + "," + os.path.abspath(DIRECTORIES.NSE_DIR) + "/"
+        else:
+            print(bcolors.FAIL + "Custom NSE Resources not found, performing tests with basic categories: " + str(
+                PREDEFINED_VALUES.BASIC_NSE_CATEGORIES) + bcolors.ENDC)
+            NSECommand = "--script=" + NSECategories
+            print("NSE Options: " + NSECommand)
+            print("To learn more about NSE Categories: " + LINKS.NSE_USAGE)
     else:
-        print(bcolors.FAIL + "Custom NSE Resources not found, performing tests with basic categories: " + str(
-            PREDEFINED_VALUES.BASIC_NSE_CATEGORIES) + bcolors.ENDC)
-        NSECommand = "--script=" + NSECategories
-
-    print("NSE Options: " + NSECommand)
-    print("To learn more about NSE Categories: " + LINKS.NSE_USAGE)
+        NSECommand = ""
 
     scanRangeNmap = getPortRangeScanType(scanType)
     scanProtocolType = getProtocolScanType(scanProtocol)
     # We use the spread operator '*' to concatenate the "baseCommande" list with the interface options
-    baseCommande = ["nmap", "-T5", scanProtocolType, scanRangeNmap, *hosts, NSECommand, "-oX", newReportPath]
+    baseCommande = ["nmap", "-T5", scanProtocolType, scanRangeNmap, *hosts, "-oX", newReportPath]
     if (interface != ""):
         cmd = [*baseCommande, "-e", interface]
 
     else:
         cmd = baseCommande
 
+    if NSECommand != "":
+        cmd = [*baseCommande, NSECommand]
+
     # Just converting the list to a string, joining elements with a " " space. to get the executed command
     print(bcolors.OKCYAN + "executing command: " + " ".join(cmd) + bcolors.ENDC)
 
+    # Timeout should be passed as arg in CLI if needed
     exitCode = runCommand(cmd)
 
     if exitCode != 0:
-        print(bcolors.FAIL + "Nmap command exited with error code: " + str(exitCode) + bcolors.ENDC)
-        exit(1)
+       print(bcolors.FAIL + "Nmap command exited with error code: " + str(exitCode) + bcolors.ENDC)
+       exit(1)
 
-    # We may use the "output" later
 
     print(bcolors.OKGREEN + "Scan completed" + bcolors.ENDC)
     print("temporary report saved in: " + bcolors.BOLD + newReportPath + bcolors.OKBLUE + bcolors.ENDC)
